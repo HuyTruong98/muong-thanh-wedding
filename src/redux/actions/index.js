@@ -175,6 +175,25 @@ export const actGetUserById = (value) => {
   };
 };
 
+
+export function getUserById2(id) {
+  return (dispatch) => {
+    return callApi(`users/${id}`, "GET", null).then((res) => {
+      if (res) {
+        dispatch(actGetUserById2(res.data));
+      }
+    });
+  };
+}
+
+export const actGetUserById2 = (value) => {
+  return {
+    type: Types.EDIT_USER,
+    value,
+  };
+};
+
+
 export const checkToken = (data) => {
   return {
     type: Types.CHECK_TOKEN,

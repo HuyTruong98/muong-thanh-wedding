@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Form, Input, Radio, DatePicker, Rate, Select } from "antd";
+import { Form, Input, Radio, DatePicker, Rate, Select, Upload, Button, message } from "antd";
+import { UploadOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 const { Option } = Select;
 
 
-function FormHotel({ onSave, form }) {
+export default function FormRestaurant({ onSave, form }) {
 
     const formItemLayout = {
         labelCol: {
@@ -115,21 +116,31 @@ function FormHotel({ onSave, form }) {
                 </Form.Item>
 
 
-                <Form.Item
+                {/* <Form.Item
                     label="Ảnh chính"
                     name="img"
-                    rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
+                // rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
                 >
-                    <Input placeholder="http://.." />
+                    <Upload
+                        listType="picture"
+                        beforeUpload={() => false}
+                    >
+                        <Button icon={<UploadOutlined />}>Up ảnh chính</Button>
+                    </Upload>
                 </Form.Item>
 
                 <Form.Item
-                    label="Ảnh thêm"
+                    label="Ảnh phụ"
                     name="img1"
                     rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
                 >
-                    <Input placeholder="http://.." />
-                </Form.Item>
+                    <Upload
+                        listType="picture"
+                        beforeUpload={() => false}
+                    >
+                        <Button icon={<UploadOutlined />}>Up ảnh phụ</Button>
+                    </Upload>
+                </Form.Item> */}
 
                 <Form.Item
                     label="Rate"
@@ -176,4 +187,3 @@ function FormHotel({ onSave, form }) {
     );
 }
 
-export default FormHotel;

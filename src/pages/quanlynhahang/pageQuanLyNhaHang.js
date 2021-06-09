@@ -28,10 +28,22 @@ function PageQuanLyNhaHang({ match, location }) {
   }
 
   function onSave(value) {
+    // const newImg = value.img.fileList.map((file) => file.thumbUrl);
+    // const newImages = value.img1.fileList.map((file) => file.thumbUrl);
+    // console.log(newImg);
+    // const newValue = {
+    //   ...value,
+    //   img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
+    //   img1: newImages,
+    // }
+    // console.log(newValue);
+
     if (value.id) {
-      dispatch(act.actUpdateRestaurantRequest(value));
+      // dispatch(act.actUpdateRestaurantRequest(newValue));
+      console.log(value);
     } else {
       dispatch(act.actCreateRestaurantRequest(value));
+      console.log(value);
     }
     cancel();
   }

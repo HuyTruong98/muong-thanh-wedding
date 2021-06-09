@@ -7,7 +7,7 @@ import Footer from '../../trangchu/Footer/Footer';
 function About(props) {
   return (
     <>
-      <div className="about-us-logo">
+      <div className="about-us-logo" style={{ marginTop: 84 }}>
         <img src="http://granddanang.muongthanh.com/FileUpload/Images/logo_all28da_nang_1.png" height="100px" alt="photo" />
       </div>
       <Animated animationIn="bounceInLeft delay-2" animationOut="fadeOut" isVisible={true}>

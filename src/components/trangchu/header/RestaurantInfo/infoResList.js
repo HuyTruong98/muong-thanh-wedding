@@ -7,10 +7,6 @@ function InfoResList({ dataListRestaurant, typeShow, setCheckShowPage }) {
     return <>{moment().format("DD/MM/YYYY")}</>;
   }
 
-
-
-
-
   return dataListRestaurant.filter(
     (itemList) => itemList.restaurantName === typeShow
   ).length > 0

@@ -52,7 +52,7 @@ function Reviews({ match }) {
 
 
   return (
-    <div>
+    <div style={{ marginTop: 70 }}>
       <div className="about-us-logo" style={{ background: '#f5f5f5' }} >
         <img src="http://granddanang.muongthanh.com/FileUpload/Images/logo_all28da_nang_1.png" height="100px" alt="photo" />
       </div>

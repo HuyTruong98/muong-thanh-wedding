@@ -25,7 +25,7 @@ function Profile(props) {
 
   }
   return (
-    <div style={{ marginTop: '60px', height: '1170px', background: 'white' }}>
+    <div style={{ marginTop: 94, height: '1170px', background: 'white' }}>
       <div className="container main-secction">
         <div className="row">
           <div className="col-md-12 col-sm-12 col-xs-12 image-section">
@@ -196,7 +196,7 @@ function Profile(props) {
                                       <label>Tổng thanh toán</label>
                                     </div>
                                     <div class="col-md-6">
-                                      <p>{renderTien(item.numberOfTable * item.itemHall.price + item.priceService)}</p>
+                                      <strong>{renderTien(item.numberOfTable * item.itemHall.price + item.priceService)}</strong>
                                     </div>
                                   </div>
                                   <div class="row">
@@ -204,7 +204,7 @@ function Profile(props) {
                                       <label>Tổng thanh toán 10%</label>
                                     </div>
                                     <div class="col-md-6">
-                                      <p>{renderTien(item.numberOfTable * item.itemHall.price * 0.1 + item.priceService)}</p>
+                                      <strong>{renderTien(item.numberOfTable * item.itemHall.price * 0.1 + item.priceService)}</strong>
                                     </div>
                                   </div>
                                 </>
@@ -228,11 +228,11 @@ function Profile(props) {
                             </div>
                           </div>
                         </div>
-                        <a href="http://camaradecomerciozn.com/">
+                        <div style={{ background: 'white' }}>
                           <div className="col-md-12 image-right">
-                            <img src="http://granddanang.muongthanh.com/FileUpload/Images/logo_all28da_nang_1.png" alt="photo" />
+                            <img style={{ background: 'white' }} src="http://granddanang.muongthanh.com/FileUpload/Images/logo_all28da_nang_1.png" alt="photo" />
                           </div>
-                        </a>
+                        </div>
                         <div className="col-md-12 image-right-detail-section2">
                         </div>
                       </div>

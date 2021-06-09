@@ -27,7 +27,6 @@ export default function Pagelogin() {
   //tạo function login
   function login(value) {
     dataUser.map((item, index) => {
-      console.log(item);
       if (value.email === item.email && value.password === item.password) {
         localStorage.setItem("userInfo", JSON.stringify(item.id));
         dispatch(act.applicationId(item.id));
@@ -37,8 +36,6 @@ export default function Pagelogin() {
 
   return (
     <>
-
-
       <div className="form-v2">
         <div className="page-content" >
           <div className="form-v2-content">

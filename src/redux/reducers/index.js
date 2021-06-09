@@ -17,6 +17,7 @@ import service from './service';
 import quanlyhoadon from './quanlyhoadon';
 import comment from './comment';
 import location from './location';
+import itemUser from "./itemUser";
 
 const appReducers = combineReducers({
   product,
@@ -36,7 +37,8 @@ const appReducers = combineReducers({
   service,
   quanlyhoadon,
   comment,
-  location
+  location,
+  itemUser
 });
 
 export default appReducers;

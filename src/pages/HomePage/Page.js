@@ -4,7 +4,7 @@ import MenuLeft from "./MenuLeft";
 import Nav from "./Nav";
 import TrangChu from "./TrangChu";
 
-function Page(props) {
+function Page() {
   const dataAccount = useSelector((state) => state.account);
   return (
     <>
