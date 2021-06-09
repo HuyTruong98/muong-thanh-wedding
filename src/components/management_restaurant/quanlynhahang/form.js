@@ -116,7 +116,7 @@ export default function FormRestaurant({ onSave, form }) {
                 </Form.Item>
 
 
-                {/* <Form.Item
+                <Form.Item
                     label="Ảnh chính"
                     name="img"
                 // rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
@@ -140,7 +140,7 @@ export default function FormRestaurant({ onSave, form }) {
                     >
                         <Button icon={<UploadOutlined />}>Up ảnh phụ</Button>
                     </Upload>
-                </Form.Item> */}
+                </Form.Item>
 
                 <Form.Item
                     label="Rate"
