@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Radio, DatePicker, Rate, Select, Upload, Button, message } from "antd";
+import { Form, Input, Radio, DatePicker, Rate, Select, Upload, Button, Image } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 const { Option } = Select;
@@ -22,6 +22,7 @@ export default function FormRestaurant({ onSave, form }) {
     };
     const dateFormat = 'DD/MM/YYYY';
     const allLocation = useSelector(state => state.location.listLocation);
+    const item = useSelector(state => state.itemEditing);
 
     return (
         <>
@@ -117,14 +118,14 @@ export default function FormRestaurant({ onSave, form }) {
 
 
                 <Form.Item
-                    valuePropName="fileList"
+                    // valuePropName="fileList"
                     label="Ảnh chính"
                     name="img"
-                    getValueFromEvent={(e) => {
-                        if (Array.isArray(e)) return e;
-                        return e && e.fileList
-                    }}
-                    rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
+                // getValueFromEvent={(e) => {
+                //     if (Array.isArray(e)) return e;
+                //     return e && e.fileList
+                // }}
+                // rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
                 >
                     <Upload
                         listType="picture"
@@ -132,17 +133,18 @@ export default function FormRestaurant({ onSave, form }) {
                     >
                         <Button icon={<UploadOutlined />}>Up ảnh chính</Button>
                     </Upload>
+                    <Image src={item && item.img} style={{ width: '100%', height: '260px', borderRadius: '7px' }} />
                 </Form.Item>
 
                 <Form.Item
-                    valuePropName="fileList"
+                    // valuePropName="fileList"
                     label="Ảnh phụ"
                     name="img1"
-                    getValueFromEvent={(e) => {
-                        if (Array.isArray(e)) return e;
-                        return e && e.fileList
-                    }}
-                    rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
+                // getValueFromEvent={(e) => {
+                //     if (Array.isArray(e)) return e;
+                //     return e && e.fileList
+                // }}
+                // rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
                 >
                     <Upload
                         listType="picture"
@@ -150,6 +152,13 @@ export default function FormRestaurant({ onSave, form }) {
                     >
                         <Button icon={<UploadOutlined />}>Up ảnh phụ</Button>
                     </Upload>
+                    {item && Array.isArray(item.img1) && item.img1.length > 0 && item.img1.map((item, index) => {
+                        if (item) {
+                            return (
+                                <Image key={index} src={item} style={{ width: '100%', height: '260px', borderRadius: '7px' }} />
+                            )
+                        }
+                    })}
                 </Form.Item>
 
                 <Form.Item

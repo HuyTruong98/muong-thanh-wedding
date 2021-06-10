@@ -31,27 +31,29 @@ function PageQuanLyNhaHang({ match, location }) {
   }
 
   function onSave(value) {
-
-
-
     if (value.id) {
       dispatch(act.actGetRestaurantRequest(value.id))
       const newImg = value.img.fileList &&
         Array.isArray(value.img.fileList) &&
         value.img.fileList ? value.img.fileList.map((file) => file.thumbUrl) : itemRestaurant.img;
-      const newImages = value.img1.fileList &&
-        Array.isArray(value.img1.fileList) &&
-        value.img1.fileList ? value.img1.fileList.map((file) => file.thumbUrl) : itemRestaurant.img1;
+      const newImages =
+        value.img1.fileList &&
+          Array.isArray(value.img1.fileList) &&
+          value.img1.fileList ? value.img1.fileList.map((file) => file.thumbUrl) : itemRestaurant.img1;
       const newValue = {
-        ...itemRestaurant,
         ...value,
         img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
         img1: newImages,
       }
       dispatch(act.actUpdateRestaurantRequest(newValue));
     } else {
-      const newImg = value.img.fileList && Array.isArray(value.img.fileList) && value.img.fileList.map((file) => file.thumbUrl);
-      const newImages = value.img1.fileList && Array.isArray(value.img1.fileList) && value.img1.fileList.map((file) => file.thumbUrl);
+      const newImg = value.img.fileList &&
+        Array.isArray(value.img.fileList) &&
+        value.img.fileList ? value.img.fileList.map((file) => file.thumbUrl) : itemRestaurant.img;
+      const newImages =
+        value.img1.fileList &&
+          Array.isArray(value.img1.fileList) &&
+          value.img1.fileList ? value.img1.fileList.map((file) => file.thumbUrl) : itemRestaurant.img1;
       const newValue = {
         ...value,
         img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
@@ -60,7 +62,34 @@ function PageQuanLyNhaHang({ match, location }) {
       dispatch(act.actCreateRestaurantRequest(newValue));
     }
     cancel();
+
+    // if (value.id) {
+    //   dispatch(act.actGetRestaurantRequest(value.id))
+    //   const newImg = value.img.fileList &&
+    //     Array.isArray(value.img.fileList) &&
+    //     value.img.fileList ? value.img.fileList.map((file) => file.thumbUrl) : itemRestaurant.img;
+    //   const newImages = value.img1.fileList &&
+    //     Array.isArray(value.img1.fileList) &&
+    //     value.img1.fileList ? value.img1.fileList.map((file) => file.thumbUrl) : itemRestaurant.img1;
+    //   const newValue = {
+    //     ...itemRestaurant,
+    //     ...value,
+    //     img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
+    //     img1: newImages,
+    //   }
+    //   dispatch(act.actUpdateRestaurantRequest(newValue));
+    // } else {
+    //   const newImg = value.img.fileList && Array.isArray(value.img.fileList) && value.img.fileList.map((file) => file.thumbUrl);
+    //   const newImages = value.img1.fileList && Array.isArray(value.img1.fileList) && value.img1.fileList.map((file) => file.thumbUrl);
+    //   const newValue = {
+    //     ...value,
+    //     img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
+    //     img1: newImages,
+    //   }
+    //   dispatch(act.actCreateRestaurantRequest(newValue));
+    // }
   }
+
 
   function onDelete(id) {
     dispatch(act.actDeleteRestaurantRequest(id));
