@@ -231,7 +231,6 @@ body {
   width: 100%;
   padding: 4% 2%;
   box-sizing: border-box;
-  height: 300px;
 }
 .box {
   flex: 1;
@@ -276,10 +275,6 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-body {
-  background: white;
 }
 
 .nguoisanglap-1 {
@@ -338,7 +333,7 @@ body {
 }
 .user-image {
   position: absolute;
-  margin-top: -80px;
+  margin-top: -48px;
 }
 .user-left-part {
   margin: 0px;

@@ -1,5 +1,6 @@
-import { Row, Rate, List, Image, Space, Col, Button, Skeleton, Spin, Card } from 'antd';
+import { Row, Rate, List, Image, Space, Col, Button, Skeleton, Tag, Card, Alert, Descriptions, Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { AudioOutlined, ClockCircleOutlined, InfoCircleOutlined } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { renderTien } from '../notification/renderConvert';
@@ -72,7 +73,6 @@ function DetailSanh({ match, history }) {
       dispatch(act.actCreateDatBanRequest(value));
       setSaveSuccess(!saveSuccess);
     }
-
   }
 
   useEffect(() => {
@@ -84,168 +84,167 @@ function DetailSanh({ match, history }) {
     setVisible(false);
   };
 
+  function renderHallItems() {
+    return sanhTheoNh.map((hallItem, hallIndex) => {
+      return (
+        <Card key={`hall-${hallIndex}`} style={{ marginTop: 16 }}>
+          <Alert
+            message={hallItem.bookNice}
+            type="error"
+            icon={<ClockCircleOutlined />}
+            showIcon
+            style={{ marginBottom: 16 }}
+          />
+          <Row justify="space-between">
+            <h4 style={{ color: '#c41d7f' }}>{hallItem.hallName}</h4>
+            <Space>
+              <div>Vui lòng đặt bàn tại Sảnh để được báo giá!</div>
+              <Button type="primary" onClick={() => showDrawer(hallItem.id)}>Đặt bàn</Button>
+            </Space>
+          </Row>
+          <Row gutter={16} style={{ marginTop: 16 }}>
+            <Col span={8}>
+              {Array.isArray(hallItem.img) && hallItem.img.length > 0 && hallItem.img.map((hallItem, index) => {
+                if (hallItem) {
+                  return (
+                    <Image key={index} src={hallItem} style={{ width: '100%', height: '135px', objectFit: 'cover' }} />
+                  )
+                }
+              })}
+            </Col>
+            <Col span={10}>
+              <Descriptions
+                layout="horizontal"
+                bordered
+              >
+                <Descriptions.Item label="Sức chứa" span={3}>
+                  {hallItem.quantity} bàn
+                </Descriptions.Item>
+                <Descriptions.Item label="Tầng" span={3}>
+                  {hallItem.floor}
+                </Descriptions.Item>
+                <Descriptions.Item label="View" span={3}>
+                  {hallItem.view}
+                </Descriptions.Item>
+                <Descriptions.Item label="Thuộc Thành Phố" span={3}>
+                  {hallItem.city}
+                </Descriptions.Item>
+                <Descriptions.Item label="Giá/bàn" span={3}>
+                  {renderTien(hallItem.price)}
+                </Descriptions.Item>
+              </Descriptions>
+            </Col>
+            <Col span={6}>
+              <Divider orientation="left" style={{ marginTop: 0, color: '#c41d7f' }}>Các tiếc mục</Divider>
+              <ul>
+                <li style={{ fontSize: '16px' }}>Nhảy sexy: Vũ điệu hawai sôi nổi</li>
+                <li style={{ fontSize: '16px' }}>Band nhạc trẻ: Những ca khúc hot</li>
+                <li style={{ fontSize: '16px' }}>Múa quạt: Động tác dẻo dai</li>
+                <li style={{ fontSize: '16px' }}>Múa cổ điển: Đi theo năm tháng</li>
+                <li style={{ fontSize: '16px' }}>Múa nước: Sẽ đẹp hơn khi tại biển</li>
+              </ul>
+            </Col>
+          </Row>
+          <Space>
+            <InfoCircleOutlined />
+            <div style={{ fontSize: 16, marginTop: 8 }}>{hallItem.title}</div>
+          </Space>
+        </Card>
+      );
+    })
+  }
+
   return (
-    <div style={{ background: '#f5f5f5', marginTop: 64 }}>
-      {
-        dataAccount.checkToken ?
-          <>
-            <Button style={{ marginTop: '20px', marginLeft: '20px', color: 'black' }} type="primary" onClick={() => comeBack()}>Quay lại</Button>
-            <Row >
-              <Col span={4}></Col>
-              <Col span={10}>
-                <iframe style={{ borderRadius: '7px' }} width="100%" height="315" src={restaurantList.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </Col>  &emsp;
-              <Col span={7}>
-                <div className="row ">
-                  <div className="col-md-12 restaurant1">
-                    <Image src={restaurantList.img} style={{ width: '100%', height: '160px', borderRadius: '7px' }} />
-                  </div>
-                  <div className="col-md-12 highlight-restaurant">
+    <div style={{ background: '#fff0f6', marginTop: 70 }}>
+      <div style={{ maxWidth: 1280, width: '100%', margin: '0 auto', padding: '32px 16px' }}>
+        {
+          dataAccount.checkToken ?
+            <>
+              {/* <Button style={{ marginTop: '20px', marginLeft: '20px' }} type="primary" onClick={() => comeBack()}>Quay lại</Button> */}
+              <Row gutter={[16, 8]}>
+                <Col span={14}>
+                  <iframe style={{ borderRadius: 5 }} width="100%" height="376px" src={restaurantList.video} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </Col>
+                <Col span={10}>
+                  <Row gutter={[16, 8]}>
+                    <Col span={24}>
+                      <div>
+                        <Image src={restaurantList.img} style={{ width: '100%', height: '180px', borderRadius: 5, objectFit: 'cover' }} />
+                      </div>
+                    </Col>
                     {Array.isArray(restaurantList.img1) && restaurantList.img1.length > 0 && restaurantList.img1.map((item, index) => {
                       if (item) {
                         return (
-                          <Image key={index} src={item} style={{ width: '100%', height: '150px', borderRadius: '7px' }} />
+                          <Col span={12}>
+                            <Image key={index} src={item} style={{ width: '100%', height: '180px', borderRadius: 5, objectFit: 'cover' }} />
+                          </Col>
                         )
                       }
                     })}
-                  </div>
-                </div>
-              </Col>
-              <Col span={4}></Col>
-            </Row>
-            <Row>
-              <Col span={4}></Col>
-              <Col span={10}>
-                <Card style={{ marginBottom: '20px', borderRadius: '10px' }}>
-                  <div>
-                    <div style={{
-                      color: 'white',
-                      width: '120px',
-                      textAlign: 'center',
-                      background: '#dc3545',
-                      height: '25px',
-                      borderRadius: '5px'
-                    }}> <i class="fa fa-microchip" aria-hidden="true"></i> MC miễn phí
+                  </Row>
+                </Col>
+                <Col span={14}>
+                  <Card style={{ marginBottom: '16px' }}>
+                    <div>
+                      <div>
+                        <Tag icon={<AudioOutlined />} color="#c41d7f" style={{ height: 24 }}>
+                          MC miễn phí
+                        </Tag>
+                      </div>
+                      <Space>
+                        <h4 style={{ fontSize: '24px', paddingTop: '16px' }}>
+                          {restaurantList.restaurantName}
+                        </h4>
+                        <Rate disabled value={restaurantList.rate} />
+                      </Space>
+                      <div>
+                        <div style={{ fontSize: '16px' }}>{restaurantList.address}, {restaurantList.district}, {restaurantList.city} </div>
+                        <div style={{ fontSize: '16px' }}>Số điện thoại:  {restaurantList.phoneNumber}</div>
+                      </div>
                     </div>
-                    <p style={{ fontSize: '20px', paddingTop: '20px' }}>{restaurantList.restaurantName} &ensp;  <Rate disabled value={restaurantList.rate} /></p>
-                    <strong>{restaurantList.address}, {restaurantList.district}, {restaurantList.city} </strong> < br />
-                    <strong >Số điện thoại:  {restaurantList.phoneNumber}</strong>
-                  </div>
-                </Card>
-                <Card
-                  style={{ borderRadius: '10px' }}
-                >
-                  <div style={{ display: 'flex', width: '100%', textAlign: 'center', color: 'green' }}>
-                    <p style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-beer" aria-hidden="true"></i> <br /> Bia cao cấp</p>
-                    <p style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-glass" aria-hidden="true"></i> <br /> Khu bar</p>
-                    <p style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-television" aria-hidden="true"></i> <br /> TV chiếu</p>
-                    <p style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-phone" aria-hidden="true"></i> <br /> Nhân viên chăm sóc khách hàng </p>
-                    <p style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-snowflake-o" aria-hidden="true"></i> <br /> Điều hòa </p>
-                  </div>
-                </Card>
-              </Col> &emsp;
-              <Col span={7}>
-                <Card style={{ borderRadius: '10px' }}>
-                  <p style={{ width: '100%' }}> <i style={{ color: 'green', fontSize: '18px' }} class="fa fa-car" aria-hidden="true"></i> &ensp; Đỗ xe  <span style={{ paddingLeft: '59%' }}>MIỄN PHÍ</span> </p>
-                  <div style={{ width: '100%', height: '100%' }}>
-                    <hr />
-                    <iframe src={restaurantList.map} width="100%" height="222px" style={{ border: '0' }} allowfullscreen="" loading="lazy"></iframe>
-                  </div>
-                </Card>
-              </Col>
-              <Col span={3}></Col>
-            </Row>
-            <Row style={{ background: '#f5f5f5', marginLeft: '17%' }}>
-              <Space style={{ width: '86%', background: '#fcced74a', marginTop: '55px' }} >
-                <List
-                  header={dataAccount.checkToken ? "Mời bạn đặt tiệc tại đây" : ""}
-                  style={{ background: '#f5f5f5' }}
-                  size="large"
-                  bordered
-                  dataSource={sanhTheoNh}
-                  extra
-                  renderItem={item =>
-                    <>
-                      <Card
-                        style={{ background: '#ffc0cb7d', marginBottom: '40px', width: '100%' }}
-                      >
-                        <div style={{ fontFamily: 'sans-serif', fontSize: '15px' }} >
-                          {item.title} <hr />
-                        </div>
-                        <div style={{ paddingBottom: '40px' }}>
-
-                          <div style={{ color: 'white' }} className=" btn-lg btn-danger   infinite like disabled"
-                          ><ClockCircleFilled style={{ paddingRight: '10px' }} /> Ưu đãi: {item.bookNice}
-                          </div>
-                        </div>
-                        <Space>
-                          <Row>
-                            <Col span={8}>
-                              <p>
-                                {Array.isArray(item.img) && item.img.length > 0 && item.img.map((item, index) => {
-                                  if (item) {
-                                    return (
-                                      <Image key={index} src={item} style={{ width: '100%', height: '200px' }} />
-                                    )
-                                  }
-                                })}
-                              </p>
-                            </Col>
-                            <Col span={1}>
-                            </Col>
-                            <Col span={6} style={{ paddingLeft: '20px' }}>
-                              <p style={{ fontSize: '19px', fontFamily: 'sans-serif' }}><strong>Tên sảnh: {item.hallName}</strong></p>
-                              <p style={{ fontSize: '18px' }}>Sức chứa : {item.quantity}</p>
-                              <p style={{ fontSize: '18px' }}>Tầng : {item.floor}</p>
-                              <p style={{ fontSize: '18px' }}>View : {item.view}</p>
-                              <p style={{ fontSize: '18px' }}>Thuộc Thành Phố : {item.city}</p>
-                              <p style={{ fontSize: '18px' }}>Giá / bàn : {renderTien(item.price)}</p>
-                            </Col>
-                            <Col span={1}>
-                            </Col>
-                            <Col span={6} style={{ paddingLeft: '20px' }}>
-                              <p><strong style={{ fontSize: '20px', fontFamily: 'sans-serif' }}>Tên văn nghệ :</strong></p>
-                              <p style={{ fontSize: '18px' }}>Nhảy sexy: Vũ điệu hawai sôi nổi</p>
-                              <p style={{ fontSize: '18px' }}>Band nhạc trẻ: Những ca khúc hot</p>
-                              <p style={{ fontSize: '18px' }}>Múa quạt: Động tác dẻo dai</p>
-                              <p style={{ fontSize: '18px' }}>Múa cổ điển: Đi theo năm tháng</p>
-                              <p style={{ fontSize: '18px' }}>Múa nước: Sẽ đẹp hơn khi tại biển</p>
-                            </Col>
-                            <Col span={2} >
-                            </Col>
-                          </Row>
-                        </Space>
-                        <div style={{ textAlign: 'right' }}>
-                          <Space>
-                            Vui lòng đặt bàn tại Sảnh để được báo giá!
-                            <Button
-                              type="danger"
-                              onClick={() => showDrawer(item.id)}
-                            >
-                              Đặt bàn
-                              </Button>
-                          </Space>
-                        </div>
-                      </Card>
-                    </>
-                  }
-                />
-              </Space>
-            </Row>
-            <DrawerDatTiec
-              saveSuccess={saveSuccess}
-              visible={visible}
-              onClose={onClose}
-              onSave={onSave}
-              setThoiGianDatTiec={setThoiGianDatTiec}
-              setGioDatTiec={setGioDatTiec}
-            />
-          </>
-          :
-          <Card title="Mời bạn đăng nhập để đặt tiệc" extra={<Button type="link" onClick={() => comeBack()}><i style={{ fontSize: '40px', color: "#db8080" }} class="fa fa-hand-o-left" aria-hidden="true"></i></Button>}>
-            <Skeleton active />
-          </Card>
-      }
+                  </Card>
+                  <Card>
+                    <div style={{ display: 'flex', width: '100%', textAlign: 'center', color: 'green' }}>
+                      <div style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-beer" aria-hidden="true"></i> <br /> Bia cao cấp</div>
+                      <div style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-glass" aria-hidden="true"></i> <br /> Khu bar</div>
+                      <div style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-television" aria-hidden="true"></i> <br /> TV chiếu</div>
+                      <div style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-phone" aria-hidden="true"></i> <br /> Nhân viên chăm sóc khách hàng </div>
+                      <div style={{ width: '20%' }}><i style={{ color: 'green', fontSize: '18px' }} class="fa fa-snowflake-o" aria-hidden="true"></i> <br /> Điều hòa </div>
+                    </div>
+                  </Card>
+                </Col>
+                <Col span={10}>
+                  <Card>
+                    <Row justify="space-between" style={{ marginBottom: 8, paddingBottom: 4, borderBottom: '1px solid #f5f5f5' }}>
+                      <Space>
+                        <i style={{ color: 'green', fontSize: '18px' }} class="fa fa-car" aria-hidden="true"></i> 
+                        <div>Đỗ xe </div>
+                      </Space>
+                      <span style={{ paddingLeft: '59%' }}>MIỄN PHÍ</span>
+                    </Row>
+                    <div style={{ width: '100%', height: '100%' }}>
+                      <iframe src={restaurantList.map} width="100%" height="216px" style={{ border: '0' }} allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                  </Card>
+                </Col>
+              </Row>
+              <Divider orientation="left" style={{ color: '#c41d7f' }}>Hiện có {sanhTheoNh && sanhTheoNh.length} sảnh có sẵn</Divider>
+              {renderHallItems()}
+              <DrawerDatTiec
+                saveSuccess={saveSuccess}
+                visible={visible}
+                onClose={onClose}
+                onSave={onSave}
+                setThoiGianDatTiec={setThoiGianDatTiec}
+                setGioDatTiec={setGioDatTiec}
+              />
+            </>
+            :
+            <Card title="Mời bạn đăng nhập để đặt tiệc" extra={<Button type="link" onClick={() => comeBack()}><i style={{ fontSize: '40px', color: "#db8080" }} class="fa fa-hand-o-left" aria-hidden="true"></i></Button>}>
+              <Skeleton active />
+            </Card>
+        }
+      </div>
     </div >
   );
 }
