@@ -1,7 +1,20 @@
-import { Row, Col, Divider, List, Descriptions, Button, Image, Space, Rate, Input } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import moment from "moment"
+import {
+  Row,
+  Col,
+  Divider,
+  List,
+  Descriptions,
+  Button,
+  Image,
+  Space,
+  Rate,
+  Input,
+  Card,
+} from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 import * as act from "../../redux/actions/index";
 import {
   BrowserRouter as Router,
@@ -10,26 +23,34 @@ import {
   NavLink,
 } from "react-router-dom";
 
+import weddingBackground from "../../static/img/wedding-background.jpg";
+
 function PageDatTiec2() {
   const dispatch = useDispatch();
   const listLocations = useSelector((state) => state.location.listLocation);
   const restaurantList = useSelector((state) => state.restaurant);
   const [dataNhaHang, setDataNhaHang] = useState();
-  const [searchKey, setSearchKey] = useState('');
+  const [searchKey, setSearchKey] = useState("");
+  const [locationSelected, setLocationSelected] = useState(-1);
 
   const filterRestaurant = restaurantList.filter((item) => {
-    return item.restaurantName.trim().toLowerCase().indexOf(searchKey.trim().toLowerCase()) !== -1;
+    return (
+      item.restaurantName
+        .trim()
+        .toLowerCase()
+        .indexOf(searchKey.trim().toLowerCase()) !== -1
+    );
   });
 
-
   const handleOnChangeTheoNH = (id) => {
+    setLocationSelected(id);
     dispatch(act.actGetRestaurantRequest(id));
-    setDataNhaHang(restaurantList.filter(itemNH => itemNH.locationId === id));
-  }
+    setDataNhaHang(restaurantList.filter((itemNH) => itemNH.locationId === id));
+  };
 
   const onShowNhaHang = (id) => {
     dispatch(act.actGetRestaurantRequest(id));
-  }
+  };
 
   // const onShowSanhTheoNhaHang = (id) => {
   //   setVisibleNhaHang(true);
@@ -38,111 +59,119 @@ function PageDatTiec2() {
 
   const renderDate = () => {
     return <>{moment().format("DD/MM/YYYY")}</>;
-  }
-
+  };
 
   useEffect(() => {
     dispatch(act.actFetchLocationRequest());
     dispatch(act.actFetchRestaurantRequest());
     dispatch(act.actFetchTatCaSanhRequest());
-  }, [])
-  return (
-    <>
-      {/* {visibleNhaHang ?
-        (
-          <DetailSanh setVisibleNhaHang={setVisibleNhaHang} />
-        ) :
-        ( */}
-      <div style={{ marginTop: 54, background: '#f5f5f5' }}>
-        <div style={{ display: 'flex', width: '100%' }}>
-          <div style={{ fontSize: '25px', width: '25%', paddingTop: '20px' }}>Mời bạn đặt tiệc:</div>
+  }, []);
 
-          <div style={{ width: '40%', paddingTop: '24px' }}>
-            <Input.Search placeholder="Tìm nhà hàng..."
-              onChange={(e) => setSearchKey(e.target.value)}
+  const renderRestaurantItems = () => {
+    const restaurantList =
+      dataNhaHang && dataNhaHang.length > 0 ? dataNhaHang : filterRestaurant;
+    return restaurantList.map((restaurantItem, restaurantIndex) => (
+      <Card size="small" style={{ marginBottom: 16 }}>
+        <Row gutter={16}>
+          <Col span={8}>
+            <Image
+              src={restaurantItem.img}
+              style={{ width: "100%", height: "240px", objectFit: "cover", borderRadius: 5 }}
             />
-          </div>
-        </div>
-        <div className="restaurant-list-container">
+          </Col>
+          <Col span={16}>
+            <Row justify="space-between">
+              <div>
+                <h4 style={{ color: '#c41d7f' }}>{restaurantItem.restaurantName}</h4>
+                <Rate disabled value={restaurantItem.rate} />
+              </div>
+              <NavLink
+                to={{
+                  pathname: `/booking/${restaurantItem.id}`,
+                  id: restaurantItem.id,
+                }}
+              >
+                <Button type="primary">Chi tiết</Button>
+              </NavLink>
+            </Row>
+            <Descriptions
+              layout="horizontal"
+              bordered
+              size="small"
+              style={{ marginTop: 16 }}
+            >
+              <Descriptions.Item label="Số điện thoại" span={3}>
+                {restaurantItem.phoneNumber}
+              </Descriptions.Item>
+              <Descriptions.Item label="Địa chỉ" span={3}>
+                {restaurantItem.address} - {restaurantItem.district}
+              </Descriptions.Item>
+              <Descriptions.Item label="Thành phố" span={3}>
+                {restaurantItem.city}
+              </Descriptions.Item>
+              <Descriptions.Item label="Ngày thành lập" span={3}>
+                {renderDate(restaurantItem.date)}
+              </Descriptions.Item>
+            </Descriptions>
+          </Col>
+        </Row>
+      </Card>
+    ));
+  };
 
-          <Row gutter={16}>
-            <Col span={5} style={{ height: '1600px', background: '#f5f5f5' }}>
-              <Divider orientation="left">Địa điểm:</Divider>
+  return (
+    <div style={{ marginTop: 70, background: "#fff0f6" }}>
+      <div
+        className="restaurant-list-top"
+        style={{ backgroundImage: `url(${weddingBackground})` }}
+      >
+        <div className="restaurant-list-background">
+          <Input
+            size="large"
+            placeholder="Tìm nhà hàng..."
+            bordered
+            suffix={<SearchOutlined />}
+            onChange={(e) => setSearchKey(e.target.value)}
+            style={{ width: 500 }}
+          />
+        </div>
+      </div>
+      <div className="restaurant-list-container">
+        <Row gutter={16}>
+          <Col span={5}>
+            <Divider orientation="left" style={{ color: '#c41d7f' }}>Địa điểm</Divider>
+            <Card size="small">
               <List
-                style={{ background: '#ffc0cb7d' }}
-                bordered
                 dataSource={[
-                  ...listLocations
+                  {
+                    id: -1,
+                    city: "Tất cả",
+                    key: -1,
+                  },
+                  ...listLocations,
                 ]}
-                renderItem={item =>
+                renderItem={(item) => (
                   <List.Item
-                    style={{ justifyContent: 'center', border: '2px solid #b29797', cursor: 'pointer' }}
+                    className={`restaurant-location-item ${
+                      locationSelected === item.id ? "active" : ""
+                    }`}
                     onClick={() => handleOnChangeTheoNH(item.id)}
                   >
                     {item.city}
                   </List.Item>
-                }
+                )}
               />
-            </Col>
-            <Col span={19}>
-              <Divider orientation="left">Danh sách nhà hàng theo địa điểm:</Divider>
-              <List
-                style={{ background: '#e7dbde85' }}
-                size="large"
-                bordered
-                dataSource={dataNhaHang && dataNhaHang.length > 0 ? dataNhaHang : filterRestaurant}
-                renderItem={item =>
-                  <>
-                    <Descriptions
-                      style={{ background: '#ffc0cb7d', marginBottom: '40px' }}
-                      bordered
-                    >
-                      <Space>
-                        <Row>
-                          <Col span={10}>
-                            <Image src={item.img} style={{ width: '100%', height: '100%' }} />
-                          </Col>
-                          <Col span={1}>
-                          </Col>
-                          <Col span={11}>
-                            <p style={{ fontSize: '20px', fontFamily: 'sans-serif' }}>{item.restaurantName}</p>
-                            <p>Tiêu chuẩn nhà hàng :  &ensp;<Rate disabled defaultValue={5} /></p>
-                            <p>Số điện thoại : {item.phoneNumber}</p>
-                            <p>Địa chỉ : {item.address} - {item.district}</p>
-                            <p>Thành phố: {item.city}</p>
-                            <p>Ngày thành lập: {renderDate(item.date)}</p>
-                          </Col>
-                          <Col span={2}>
-                            {/* {renderDetail()} */}
-                            <NavLink className="btn btn-danger"
-                              style={{
-                                textDecoration: 'none',
-                                color: 'white',
-                                background: '#dc3545',
-                                borderRadius: '5px',
-                              }}
-                              to={{
-                                pathname: `/booking/${item.id}`,
-                                id: item.id
-                              }}
-                            >
-                              Chi tiết
-                              </NavLink>
-                          </Col>
-                        </Row>
-                      </Space>
-                    </Descriptions>
-                  </>
-                }
-              />
-            </Col>
-          </Row>
-        </div>
+            </Card>
+          </Col>
+          <Col span={19}>
+            <Divider orientation="left" style={{ color: '#c41d7f' }}>
+              Danh sách nhà hàng theo địa điểm
+            </Divider>
+            {renderRestaurantItems()}
+          </Col>
+        </Row>
       </div>
-      {/* )
-      } */}
-
-    </>
+    </div>
   );
 }
 

@@ -80,7 +80,7 @@ function DrawerDatTiec({ visible, onClose, onSave, saveSuccess, setThoiGianDatTi
               textAlign: "right",
             }}
           >
-            <Button style={{ color: 'black' }} type="primary" onClick={() => form.submit()}>
+            <Button type="primary" onClick={() => form.submit()}>
               Đặt tiệc
             </Button>
             <Button

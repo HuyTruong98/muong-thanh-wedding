@@ -253,15 +253,6 @@ li a:focus {
 
 /* --------------------- Home ---------------------------- */
 
-html,
-body,
-.carousel,
-.carousel-inner,
-.carousel-inner .item {
-  height: 100%;
-  background: whitesmoke;
-}
-
 * {
   margin: 0;
   padding: 0;
