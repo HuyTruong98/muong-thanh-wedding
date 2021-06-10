@@ -8,6 +8,7 @@ function ModalUser({ isVisible, handleCancel, onSave }) {
 
   const [form] = useForm();
   const initialValue = useSelector(state => state.itemUser);
+  console.log(initialValue);
 
   useEffect(() => {
     form.resetFields();
@@ -20,7 +21,7 @@ function ModalUser({ isVisible, handleCancel, onSave }) {
       <Modal
         title="Thêm mới"
         visible={isVisible}
-        handleCancel={handleCancel}
+        onCancel={handleCancel}
         width={1000}
         footer={[
           <Button onClick={handleCancel}>Hủy</Button>,

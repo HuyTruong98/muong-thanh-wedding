@@ -15,6 +15,7 @@ function PageQuanLyNhaHang({ match, location }) {
 
   // Xún redux lấy dữ liệu về theo  (state.restaurant)
   const dataListRestaurant = useSelector((state) => state.restaurant);
+  const itemRestaurant = useSelector((state) => state.itemEditing);
 
   // Khai bái dispatch để sử dụng được dispatch
   const dispatch = useDispatch();
@@ -31,25 +32,32 @@ function PageQuanLyNhaHang({ match, location }) {
 
   function onSave(value) {
 
-    // const newImg = value.img.fileList.map((file) => file.thumbUrl);
-    // const newImages = value.img1.fileList.map((file) => file.thumbUrl);
-    // console.log(newImg);
-    // const newValue = {
-    //   ...value,
-    //   img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
-    //   img1: newImages,
-    // }
+
 
     if (value.id) {
-      // const formImages = value.id 
-      // ? value.img.map((image, index) => {
-      //   uid: index,
-      //   name: `image-${index + 1}.jpg`,
-
-      // })
-      dispatch(act.actUpdateRestaurantRequest(value));
+      dispatch(act.actGetRestaurantRequest(value.id))
+      const newImg = value.img.fileList &&
+        Array.isArray(value.img.fileList) &&
+        value.img.fileList ? value.img.fileList.map((file) => file.thumbUrl) : itemRestaurant.img;
+      const newImages = value.img1.fileList &&
+        Array.isArray(value.img1.fileList) &&
+        value.img1.fileList ? value.img1.fileList.map((file) => file.thumbUrl) : itemRestaurant.img1;
+      const newValue = {
+        ...itemRestaurant,
+        ...value,
+        img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
+        img1: newImages,
+      }
+      dispatch(act.actUpdateRestaurantRequest(newValue));
     } else {
-      dispatch(act.actCreateRestaurantRequest(value));
+      const newImg = value.img.fileList && Array.isArray(value.img.fileList) && value.img.fileList.map((file) => file.thumbUrl);
+      const newImages = value.img1.fileList && Array.isArray(value.img1.fileList) && value.img1.fileList.map((file) => file.thumbUrl);
+      const newValue = {
+        ...value,
+        img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
+        img1: newImages,
+      }
+      dispatch(act.actCreateRestaurantRequest(newValue));
     }
     cancel();
   }

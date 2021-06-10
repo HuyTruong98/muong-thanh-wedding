@@ -13,6 +13,7 @@ function PageQuanLyNguoiDung({ match }) {
   const dispatch = useDispatch();
 
   function onEdit(id) {
+    console.log(id);
     dispatch(act.getUserById2(id));
     setOpenModal(true);
   }
@@ -22,6 +23,7 @@ function PageQuanLyNguoiDung({ match }) {
   }
 
   function onSave(value) {
+    console.log(value);
     if (value.id) {
       dispatch(act.actUpdateUserRequest(value));
     } else {
@@ -42,6 +44,7 @@ function PageQuanLyNguoiDung({ match }) {
     resetForm();
     setOpenModal(true);
   }
+
 
   return (
     <>

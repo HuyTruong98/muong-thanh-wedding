@@ -93,10 +93,35 @@
     },
     {
       "name": "Hoàng Huy",
+      "email": "hoanghuy789@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "role": "User",
+      "id": 14
+    },
+    {
+      "name": "Hoàng Huy",
       "email": "hoanghuy123456@gmail.com",
-      "password": "123456",
-      "confirmPass": "123456",
-      "id": 13
+      "password": "123",
+      "confirmPass": "dsadasd",
+      "role": "USER",
+      "id": 15
+    },
+    {
+      "name": "Hoàng Huy",
+      "email": "hoanghuy123456@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "role": "Admin",
+      "id": 16
+    },
+    {
+      "name": "Hoàng Huy",
+      "email": "hoanghuy789@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "role": "Admin",
+      "id": 17
     }
   ],
   "locations": [
@@ -281,6 +306,21 @@
         "https://travelmart.vn/uploads/2019/03/27/1091_i5c9afc310a285.jpg",
         "https://www.arttravel.vn/upload/hinhthem/hoitruongmin660x365-muong-thanh-7260.png"
       ]
+    },
+    {
+      "restaurantName": "Táo Đỏ",
+      "ownerName": "Táo Đỏ",
+      "phoneNumber": "0905315214",
+      "gender": "Nam",
+      "address": "20 Nguyễn Thiện Thuật",
+      "district": "dsadasd",
+      "city": "sdadwqeqwd",
+      "video": "sấccxcxc",
+      "map": "ádsacxc",
+      "rate": 5,
+      "locationId": 1,
+      "date": "2021-06-10T13:56:42.558Z",
+      "id": 9
     }
   ],
   "hallList": [
