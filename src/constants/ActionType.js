@@ -17,6 +17,7 @@ export const CREATE_USER = "CREATE_USER";
 export const APPLICATION = "APPLICATION";
 export const UPDATE_USER = "UPDATE_USER";
 export const EDIT_USER = "EDIT_USER";
+export const DELETE_USER = "DELETE_USER";
 
 // Sảnh
 export const FETCH_SANH_NHA_HANG = "FETCH_SANH_NHA_HANG";

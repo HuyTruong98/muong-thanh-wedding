@@ -82,6 +82,46 @@
       "password": "123",
       "role": "USER",
       "id": 11
+    },
+    {
+      "name": "Hoàng Huy",
+      "email": "hoanghuy123456@gmail.com",
+      "password": "123",
+      "role": "USER",
+      "img": "https://i.pinimg.com/564x/e6/57/55/e65755e73d8085e30aedfa21fde07f1b.jpg",
+      "id": 12
+    },
+    {
+      "name": "Hoàng Huy",
+      "email": "hoanghuy789@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "role": "User",
+      "id": 14
+    },
+    {
+      "name": "Hoàng Huy",
+      "email": "hoanghuy123456@gmail.com",
+      "password": "123",
+      "confirmPass": "dsadasd",
+      "role": "USER",
+      "id": 15
+    },
+    {
+      "name": "Hoàng Huy",
+      "email": "hoanghuy123456@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "role": "Admin",
+      "id": 16
+    },
+    {
+      "name": "Hoàng Huy",
+      "email": "hoanghuy789@gmail.com",
+      "password": "123",
+      "confirmPass": "123",
+      "role": "Admin",
+      "id": 17
     }
   ],
   "locations": [
@@ -271,16 +311,16 @@
   "hallList": [
     {
       "id": 1,
-      "bookNice": "Free wifi, Bánh kem, rượu sam banh",
-      "title": "Khi quý khách chọn sảnh A với view trong nhà, được trang trí bởi các chuyên gia nghệ thuật hàng đầu là sự lựa chọn tốt.",
+      "hallName": "Sảnh A",
       "restaurantName": "Mường Thanh Grand Đà Nẵng",
-      "hallName": "Sảnh A ",
       "quantity": 400,
       "price": 3000000,
+      "view": "Trong Nhà",
+      "floor": 1,
       "idRestaurant": 1,
       "city": "Đà Nẵng",
-      "floor": 1,
-      "view": "Trong Nhà",
+      "bookNice": "Free wifi, Bánh kem, rượu sam banh",
+      "title": "Khi quý khách chọn sảnh A với view trong nhà, được trang trí bởi các chuyên gia nghệ thuật hàng đầu là sự lựa chọn tốt.",
       "img": [
         "https://blog.marry.vn/wp-content/uploads/2017/01/03/chon-nha-hang-tiec-cuoi-gala-center.jpg",
         "https://znews-photo.zadn.vn/w660/Uploaded/wyhktpu/2016_06_14/Cach_to_chuc_tiec_cuoi_thanh_lich_thoi_bao_gia_3.jpg"
@@ -1040,7 +1080,7 @@
     {
       "id": 16,
       "fullName": "Nguyễn Thị Thu Thảo",
-      "phoneNumber": "0793329299",
+      "phoneNumber": "023646968",
       "gender": "Nữ",
       "birthDay": "1997-07-28T10:59:29.783Z",
       "address": "Hà Giang",
@@ -1088,8 +1128,8 @@
       "id": 9
     },
     {
-      "positionName": "Tạp vụ",
-      "id": 10
+      "id": 10,
+      "positionName": "Tạp vụ "
     },
     {
       "id": 11

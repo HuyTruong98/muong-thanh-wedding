@@ -6,15 +6,13 @@ import * as act from "../../../redux/actions/index";
 function Detail({ match, history }) {
   const { id } = match.params;
   const dispatch = useDispatch();
-  const item = useSelector(state => state.account);
-  console.log(item);
-
+  const item = useSelector(state => state.itemUser);
   function goBack() {
     history.goBack();
   }
 
   useEffect(() => {
-    dispatch(act.getUserById(id));
+    dispatch(act.getUserById2(id));
   }, [id]);
 
   return (

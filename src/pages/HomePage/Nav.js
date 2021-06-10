@@ -1,11 +1,11 @@
 import { Input } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from "react-router-dom";
 import routes from "./../../routers/routes";
 import * as act from "../../redux/actions/index";
 
-function Nav(props) {
+function Nav({ history }) {
   function renderContentMenu(routes) {
     var result = null;
     if (routes.length > 0) {

@@ -21,7 +21,7 @@ function RestaurantInfo(props) {
   }, [])
 
   return (
-    <>
+    <div style={{ marginTop: 84 }}>
       {!checkShowPage && (
         <>
           <div className="all-Restaurant-Info" style={{ textAlign: 'center' }}>
@@ -131,7 +131,7 @@ function RestaurantInfo(props) {
             setCheckShowPage={setCheckShowPage} />
         )
       }
-    </>
+    </div>
   );
 }
 

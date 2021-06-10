@@ -72,27 +72,29 @@ function NavHomePage({ onChangeVisible }) {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <ul className="nav navbar-nav">
-            <MenuLink label="Trang Chủ" to="/" activeOnlyWhenExact={true} />
-            <MenuLink
-              label="Giới Thiệu"
-              to="/about"
-              activeOnlyWhenExact={false}
-            />
-            <MenuLink
-              label="Thông Tin Nhà Hàng"
-              to="/restaurantInfo"
-              activeOnlyWhenExact={false}
-            />
-            {/* <MenuLink label="Tuyển dụng" to="/recruitment" activeOnlyWhenExact={false} /> */}
-            <MenuLink
-              label="Đánh giá"
-              to="/reviews"
-              activeOnlyWhenExact={false}
-            />
-            <MenuLink label="Đặt tiệc" to="/booking" activeOnlyWhenExact={false} />
-            {/* <MenuLink label="Đặt tiệc" onClick={() => onChangeVisible()} /> */}
-          </ul>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul className="nav navbar-nav">
+              <MenuLink label="Trang Chủ" to="/" activeOnlyWhenExact={true} />
+              <MenuLink
+                label="Giới Thiệu"
+                to="/about"
+                activeOnlyWhenExact={false}
+              />
+              <MenuLink
+                label="Thông Tin Nhà Hàng"
+                to="/restaurantInfo"
+                activeOnlyWhenExact={false}
+              />
+              {/* <MenuLink label="Tuyển dụng" to="/recruitment" activeOnlyWhenExact={false} /> */}
+              <MenuLink
+                label="Đánh giá"
+                to="/reviews"
+                activeOnlyWhenExact={false}
+              />
+              <MenuLink label="Đặt tiệc" to="/booking" activeOnlyWhenExact={false} />
+              {/* <MenuLink label="Đặt tiệc" onClick={() => onChangeVisible()} /> */}
+            </ul>
+          </div>
           {/* <!-- Topbar Navbar --> */}
           <ul className="navbar-nav ml-auto">
             {/* <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
@@ -139,13 +141,13 @@ function NavHomePage({ onChangeVisible }) {
                       aria-hidden="true"
                       title="Thông tin"
                     >
-                      <MenuLink label="Thông tin cá nhân" to="/profile" activeOnlyWhenExact={false} />
+                      <MenuLink style={{ color: 'black' }} label="Thông tin cá nhân" to="/profile" activeOnlyWhenExact={false} />
 
                     </button>
                     <br />
                     {/* Chỗ này dùng lại Dropdown và Menu của AntD nhé */}
                     <button
-                      style={{ background: 'white', color: 'rgba(158, 105, 105, 0.719)', paddingLeft: '20px', fontSize: '20px' }}
+                      style={{ background: 'white', color: 'rgb(63, 56, 56)', paddingLeft: '20px', fontSize: '20px' }}
                       aria-hidden="true"
                       onClick={() => {
                         logOut();
@@ -158,7 +160,6 @@ function NavHomePage({ onChangeVisible }) {
               </div>
             </li>
           </ul>
-
         </nav>
         {/* <Switch>{renderContentMenu(routes)}</Switch> */}
 
