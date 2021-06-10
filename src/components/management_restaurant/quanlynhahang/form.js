@@ -117,9 +117,14 @@ export default function FormRestaurant({ onSave, form }) {
 
 
                 <Form.Item
+                    // valuePropName="fileList"
                     label="Ảnh chính"
                     name="img"
-                // rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
+                    // getValueFromEvent={(e) => {
+                    //     if (Array.isArray(e)) return e;
+                    //     return e && e.fileList
+                    // }}
+                    rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
                 >
                     <Upload
                         listType="picture"
@@ -130,8 +135,13 @@ export default function FormRestaurant({ onSave, form }) {
                 </Form.Item>
 
                 <Form.Item
+                    // valuePropName="fileList"
                     label="Ảnh phụ"
                     name="img1"
+                    // getValueFromEvent={(e) => {
+                    //     if (Array.isArray(e)) return e;
+                    //     return e && e.fileList
+                    // }}
                     rules={[{ required: true, message: "Vui lòng nhập link ảnh!" }]}
                 >
                     <Upload

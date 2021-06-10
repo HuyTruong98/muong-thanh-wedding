@@ -28,6 +28,10 @@ const user_list = (state = initialState, action) => {
       index = findIndex(state, value.id);
       state[index] = value;
       return [...state];
+    case Types.DELETE_USER:
+      index = findIndex(state, id);
+      state.splice(index, 1);
+      return [...state];
     default:
       return [...state];
   }

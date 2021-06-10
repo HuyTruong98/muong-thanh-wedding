@@ -11,6 +11,7 @@ function PageQuanLyNhaHang({ match, location }) {
   const [visibleTableNhaHang, setVisibleTableNhaHang] = useState(false);
   const [visibleTableSanhTheoNhaHang, setVisibleTableSanhTheoNhaHang] =
     useState(false);
+  const [productSelected, setProductSelected] = useState({});
 
   // Xún redux lấy dữ liệu về theo  (state.restaurant)
   const dataListRestaurant = useSelector((state) => state.restaurant);
@@ -19,6 +20,7 @@ function PageQuanLyNhaHang({ match, location }) {
   const dispatch = useDispatch();
 
   const onEdit = (id) => {
+    console.log(id);
     dispatch(act.actGetRestaurantRequest(id));
     setOpenModal(true);
   };
@@ -28,22 +30,26 @@ function PageQuanLyNhaHang({ match, location }) {
   }
 
   function onSave(value) {
-    const newImg = value.img.fileList.map((file) => file.thumbUrl);
-    const newImages = value.img1.fileList.map((file) => file.thumbUrl);
-    console.log(newImg);
-    const newValue = {
-      ...value,
-      img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
-      img1: newImages,
-    }
-    console.log(newValue);
+
+    // const newImg = value.img.fileList.map((file) => file.thumbUrl);
+    // const newImages = value.img1.fileList.map((file) => file.thumbUrl);
+    // console.log(newImg);
+    // const newValue = {
+    //   ...value,
+    //   img: newImg && Array.isArray(newImg) && newImg.length > 0 && newImg[0],
+    //   img1: newImages,
+    // }
 
     if (value.id) {
-      // dispatch(act.actUpdateRestaurantRequest(value));
-      console.log(value);
+      // const formImages = value.id 
+      // ? value.img.map((image, index) => {
+      //   uid: index,
+      //   name: `image-${index + 1}.jpg`,
+
+      // })
+      dispatch(act.actUpdateRestaurantRequest(value));
     } else {
-      dispatch(act.actCreateRestaurantRequest(newValue));
-      console.log(newValue);
+      dispatch(act.actCreateRestaurantRequest(value));
     }
     cancel();
   }

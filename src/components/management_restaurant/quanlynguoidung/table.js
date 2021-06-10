@@ -4,7 +4,7 @@ import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import * as Message from '../../../constants/Message';
 
-function TableUser({ data, match }) {
+function TableUser({ data, match, onDelete, onEdit }) {
 
   const [selectionType, setSelectionType] = useState();
   const columns = [
@@ -26,11 +26,11 @@ function TableUser({ data, match }) {
       title: "Role",
       dataIndex: "role",
     },
-    // {
-    //   title: "Action",
-    //   dataIndex: "action",
-    //   render: (data, record) => actionRender(record),
-    // },
+    {
+      title: "Action",
+      dataIndex: "action",
+      render: (data, record) => actionRender(record),
+    },
   ];
 
 
@@ -41,6 +41,10 @@ function TableUser({ data, match }) {
     );
   }
 
+  function confirm(id) {
+    onDelete(id);
+  }
+
   function actionRender(record) {
     return (
       <div className="row">
@@ -49,9 +53,9 @@ function TableUser({ data, match }) {
             <i
               className="fa fa-pencil-square-o"
               style={{ color: "green", fontSize: "18px" }}
-            // onClick={() => {
-            //   onEdit(record.id);
-            // }}
+              onClick={() => {
+                onEdit(record.id);
+              }}
             ></i>
           </a>
         </div>
@@ -60,7 +64,7 @@ function TableUser({ data, match }) {
             placement="topRight"
             title={Message.BAN_CO_MUON_XOA}
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-            // onConfirm={() => confirm(record.id)}
+            onConfirm={() => confirm(record.id)}
             okText="Yes"
             cancelText="No"
           >

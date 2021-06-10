@@ -38,6 +38,7 @@ function PageQuanLySanh({ match }) {
   }
 
   function openForm() {
+    resetForm();
     setOpenModal(true);
   }
 

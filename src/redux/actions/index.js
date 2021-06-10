@@ -208,6 +208,25 @@ export const applicationId = (value) => {
   };
 };
 
+export function actDeleteUserRequest(id) {
+  return (dispatch) => {
+    return callApi(`users/${id}`, "DELETE", null).then((res) => {
+      if (res) {
+        console.log("🚀 ~ file: index.js ~ line 221 ~ returncallApi ~ res", res)
+        message.success(Message.XOA_THANH_CONG);
+        dispatch(actDeleteUser(id));
+      }
+    });
+  };
+}
+
+export const actDeleteUser = (id) => {
+  return {
+    type: Types.DELETE_USER,
+    id,
+  };
+};
+
 // Sảnh
 
 export function actFetchSanhNhaHangRequest(id) {
