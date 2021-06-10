@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Tabs, Row, Col } from "antd";
+import React, { useState } from "react";
+import { Tabs, notification } from "antd";
 import FormLog from "../../components/login/FormLog";
 import FormReg from "../../components/login/FormReg";
 // import actions vào
@@ -26,12 +26,19 @@ export default function Pagelogin() {
   }
   //tạo function login
   function login(value) {
-    dataUser.map((item, index) => {
-      if (value.email === item.email && value.password === item.password) {
-        localStorage.setItem("userInfo", JSON.stringify(item.id));
-        dispatch(act.applicationId(item.id));
-      }
-    });
+    const userSuccessIndex = dataUser.findIndex((item, index) => value.email === item.email && value.password === item.password);
+    if (userSuccessIndex !== -1) {
+      localStorage.setItem("userInfo", JSON.stringify(dataUser[userSuccessIndex].id));
+      dispatch(act.applicationId(dataUser[userSuccessIndex].id));
+      notification.success({
+        message: 'Đăng nhập thành công',
+      });
+    } else {
+      notification.error({
+        message: 'Đăng nhập thất bại',
+        description: 'Tài khoản hoặc mật khẩu không đúng!',
+      });
+    }
   }
 
   return (
